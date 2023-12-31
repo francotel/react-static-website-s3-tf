@@ -23,3 +23,4 @@ EXPOSE 3000
 
 # Command to start the application when the container starts
 CMD ["npm", "start"]
+
