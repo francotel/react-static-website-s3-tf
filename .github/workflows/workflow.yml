@@ -5,6 +5,10 @@ on:
     branches:
     - main
 
+env:
+  NODE_VERSION: 18
+  TF_VERSION: 1.6.2
+
 jobs:
   changes:
     runs-on: ubuntu-latest
@@ -37,28 +41,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - run: echo "hello iac"
 
-# name: Deploy Terraform to AWS
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        cli_config_credentials_token: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        cli_config_credentials_secret: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws_region: ${{ secrets.AWS_DEFAULT_REGION }}
+        terraform_version: env.TF_VERSION
 
-# on:
-#   push:
-#     branches:
-#       - main
 
-# jobs:
-#   deploy-iac:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v2
 
-#       - name: Setup Terraform
-#         uses: hashicorp/setup-terraform@v1
-#         with:
-#           cli_config_credentials_token: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#           cli_config_credentials_secret: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#           aws_region: ${{ secrets.AWS_DEFAULT_REGION }}
+
+
 
 #       - name: Terraform Init
 #         run: terraform init
