@@ -27,20 +27,33 @@ jobs:
           iac:
             - 'iac/**'  
 
-  app:
+  # app:
+  #   needs: changes
+  #   if: ${{ needs.changes.outputs.app == 'true' }}
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v3
+  #   - run: echo "hello app"
+  scan:
     needs: changes
     if: ${{ needs.changes.outputs.app == 'true' }}
+    name: gitleaks
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - run: echo "hello app"
-    
-    - name: Secret scanning
-      uses: github/codeql-action/secret-scanning@v1
-      with:
-        codeql-configuration: 'recommended'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE}} # Only required for Organizations, not personal accounts.
+          
+      - name: Secret scanning
+        uses: github/codeql-action/secret-scanning@v1
+        with:
+          codeql-configuration: 'recommended'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   iac:
     needs: changes
