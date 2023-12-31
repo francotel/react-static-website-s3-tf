@@ -60,7 +60,7 @@ jobs:
     if: ${{ needs.changes.outputs.iac == 'true' }}
     runs-on: ubuntu-latest
     env: 
-      working-directory: ./iac
+      working-directory: iac
     steps:
     - uses: actions/checkout@v3
 
@@ -75,6 +75,8 @@ jobs:
       with:
         terraform_version: env.TF_VERSION
         terraform_wrapper: false
+
+    - run: ls
 
     - name: Terraform Init
       run: terraform init
