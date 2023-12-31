@@ -47,7 +47,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITLEAKS_ENABLE_UPLOAD_ARTIFACT: false
           GITLEAKS_ENABLE_COMMENTS: true
-
+      
+      - run: ls -la
+      
       - name: Create config file
         run: echo "const API_SECRET = '${{ secrets.API_SECRET }}';\nexport default API_SECRET;" > src/components/Weather-App/config.js
       
