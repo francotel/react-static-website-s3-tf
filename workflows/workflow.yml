@@ -1,0 +1,51 @@
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      src: ${{ steps.changes.outputs.src }}
+      infra: ${{ steps.changes.outputs.infra }}
+    steps:
+    - uses: actions/checkout@v3
+    - uses: dorny/paths-filter@v2
+      id: changes
+      with:
+        filters: |
+          src:
+            - 'src/**'
+          infra:
+            - 'infra/**'  
+            
+# name: Deploy Terraform to AWS
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   deploy-iac:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+
+#       - name: Setup Terraform
+#         uses: hashicorp/setup-terraform@v1
+#         with:
+#           cli_config_credentials_token: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           cli_config_credentials_secret: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           aws_region: ${{ secrets.AWS_DEFAULT_REGION }}
+
+#       - name: Terraform Init
+#         run: terraform init
+
+#       - name: Terraform Plan
+#         run: terraform plan -out=tfplan
+
+#       - name: Terraform Apply
+#         run: terraform apply tfplan -auto-approve
