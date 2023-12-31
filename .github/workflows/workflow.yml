@@ -49,9 +49,9 @@ jobs:
           GITLEAKS_ENABLE_COMMENTS: true
       
       - run: ls -la
-      
+
       - name: Create config file
-        run: echo "const API_SECRET = '${{ secrets.API_SECRET }}';\nexport default API_SECRET;" > src/components/Weather-App/config.js
+        run: echo "const API_SECRET = '${{ secrets.API_SECRET }}';\nexport default API_SECRET;" > app/src/components/Weather-App/config.js
       
       - run: cat src/components/Weather-App/config.js
 
