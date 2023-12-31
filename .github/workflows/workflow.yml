@@ -34,6 +34,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: echo "hello app"
+    
+    - name: Secret scanning
+      uses: github/codeql-action/secret-scanning@v1
+      with:
+        codeql-configuration: 'recommended'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   iac:
     needs: changes
