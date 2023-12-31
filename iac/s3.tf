@@ -75,50 +75,10 @@ resource "aws_s3_bucket_lifecycle_configuration" "s3_lifecycle" {
 }
 
 resource "aws_s3_object" "website_files" {
-  for_each     = fileset("src/", "**/*.*")
+  for_each     = fileset("src-demo/", "**/*.*")
   bucket       = aws_s3_bucket.s3_bucket.id
   key          = each.value
-  source       = "src/${each.value}"
-  etag         = filemd5("src/${each.value}")
+  source       = "src-demo/${each.value}"
+  etag         = filemd5("src-demo/${each.value}")
   content_type = lookup(var.mime_types, split(".", each.value)[1])
 }
-
-
-# {
-#         "Version": "2008-10-17",
-#         "Id": "PolicyForCloudFrontPrivateContent",
-#         "Statement": [
-#             {
-#                 "Sid": "AllowCloudFrontServicePrincipal",
-#                 "Effect": "Allow",
-#                 "Principal": {
-#                     "Service": "cloudfront.amazonaws.com"
-#                 },
-#                 "Action": "s3:GetObject",
-#                 "Resource": "arn:aws:s3:::websitedemo.crosscloudx.com/*",
-#                 "Condition": {
-#                     "StringEquals": {
-#                       "AWS:SourceArn": "arn:aws:cloudfront::962542038213:distribution/E2WPDO76LRRBQT"
-#                     }
-#                 }
-#             }
-#         ]
-#       }
-
-# resource "aws_s3_object" "images" {
-#   for_each = fileset("src/images/", "*")
-#   bucket   = aws_s3_bucket.s3_bucket.id
-#   key      = each.value
-#   source   = "src/images/${each.value}"
-#   etag     = filemd5("src/images/${each.value}")
-#   content_type = "image/jpeg"
-# }
-
-# resource "aws_s3_object" "js" {
-#   for_each = fileset("src/js/", "*")
-#   bucket   = aws_s3_bucket.s3_bucket.id
-#   key      = each.value
-#   source   = "src/js/${each.value}"
-#   etag     = filemd5("src/js/${each.value}")
-#   content_type = "image/jpeg"
-# }

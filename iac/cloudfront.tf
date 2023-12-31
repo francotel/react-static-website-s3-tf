@@ -1,5 +1,5 @@
 data "aws_cloudfront_cache_policy" "cache-optimized" {
-  name = "Managed-CachingOptimized"  # "Managed-CachingOptimized"
+  name = "Managed-CachingOptimized" # "Managed-CachingOptimized"
 }
 
 resource "aws_cloudfront_origin_access_control" "cloudfront-oac" {
@@ -13,9 +13,9 @@ resource "aws_cloudfront_distribution" "main" {
   http_version = "http2"
 
   origin {
-    domain_name = "websitedemo.crosscloudx.com.s3.us-east-1.amazonaws.com"
+    domain_name              = "websitedemo.crosscloudx.com.s3.us-east-1.amazonaws.com"
     origin_access_control_id = aws_cloudfront_origin_access_control.cloudfront-oac.id
-    origin_id = "origin-${local.s3_bucket_name}"
+    origin_id                = "origin-${local.s3_bucket_name}"
   }
 
   enabled             = true
@@ -32,11 +32,11 @@ resource "aws_cloudfront_distribution" "main" {
   }
 
   default_cache_behavior {
-    target_origin_id = "origin-${local.s3_bucket_name}"
-    allowed_methods  = ["GET", "HEAD"]
-    cached_methods   = ["GET", "HEAD"]
-    compress         = true
-    cache_policy_id  = data.aws_cloudfront_cache_policy.cache-optimized.id
+    target_origin_id       = "origin-${local.s3_bucket_name}"
+    allowed_methods        = ["GET", "HEAD"]
+    cached_methods         = ["GET", "HEAD"]
+    compress               = true
+    cache_policy_id        = data.aws_cloudfront_cache_policy.cache-optimized.id
     viewer_protocol_policy = "redirect-to-https"
   }
 
