@@ -12,13 +12,5 @@ terraform {
     }
   }
   backend "s3" {}
-  
-  # backend "s3" {
-  #   bucket         = ""
-  #   dynamodb_table = ""
-  #   key            = ""
-  #   region         = ""
-  #   encrypt        = true
-  # }
 
 }

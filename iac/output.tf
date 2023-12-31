@@ -17,7 +17,3 @@ output "cf_status" {
   description = "The current status of the distribution"
   value       = aws_cloudfront_distribution.main.status
 }
-
-# output "s3" {
-#     value = aws_s3_bucket.s3_bucket
-# }
