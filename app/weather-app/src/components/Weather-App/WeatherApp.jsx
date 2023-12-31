@@ -8,12 +8,13 @@ import rain_icon from "../assets/rain.png";
 import snow_icon from "../assets/snow.png";
 import wind_icon from "../assets/wind.png";
 import humidity_icon from "../assets/humidity.png";
+import API_SECRET_OPEN_WEATHER from './config';
 
 
 
 const WeatherApp = () => {
     //ADDING API KEY
-    let api_key="***REMOVED***";
+    let api_key=API_SECRET_OPEN_WEATHER;
     const [ wicon, setWicon] = useState(cloud_icon);
 
 

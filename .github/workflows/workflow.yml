@@ -48,6 +48,11 @@ jobs:
           GITLEAKS_ENABLE_UPLOAD_ARTIFACT: false
           GITLEAKS_ENABLE_COMMENTS: true
 
+      - name: Create config file
+        run: echo "const API_SECRET = '${{ secrets.API_SECRET }}';\nexport default API_SECRET;" > src/components/Weather-App/config.js
+      
+      - run: cat src/components/Weather-App/config.js
+
   iac:
     needs: changes
     if: ${{ needs.changes.outputs.iac == 'true' }}
