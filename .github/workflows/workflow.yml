@@ -59,8 +59,9 @@ jobs:
     needs: changes
     if: ${{ needs.changes.outputs.iac == 'true' }}
     runs-on: ubuntu-latest
-    env: 
-      working-directory: iac
+    defaults:
+      run:
+        working-directory: ./iac
     steps:
     - uses: actions/checkout@v3
 
