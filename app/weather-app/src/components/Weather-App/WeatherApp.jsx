@@ -14,7 +14,7 @@ import API_SECRET_OPEN_WEATHER from './config';
 
 const WeatherApp = () => {
     //ADDING API KEY
-    let api_key=API_SECRET_OPEN_WEATHER;
+    let api_key=(API_SECRET_OPEN_WEATHER);
     const [ wicon, setWicon] = useState(cloud_icon);
 
 
