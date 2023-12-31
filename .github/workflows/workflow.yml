@@ -9,19 +9,36 @@ jobs:
   changes:
     runs-on: ubuntu-latest
     outputs:
-      src: ${{ steps.changes.outputs.src }}
-      infra: ${{ steps.changes.outputs.infra }}
+      src: ${{ steps.changes.outputs.app }}
+      infra: ${{ steps.changes.outputs.iac }}
     steps:
     - uses: actions/checkout@v3
+
     - uses: dorny/paths-filter@v2
       id: changes
       with:
         filters: |
-          src:
+          app:
             - 'app/**'
-          infra:
+          iac:
             - 'iac/**'  
-            
+
+  app:
+    needs: changes
+    if: ${{ needs.changes.outputs.app == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - run: echo "hello app"
+
+  iac:
+    needs: changes
+    if: ${{ needs.changes.outputs.iac == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - run: echo "hello iac"
+    
 # name: Deploy Terraform to AWS
 
 # on:
