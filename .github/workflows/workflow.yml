@@ -62,6 +62,20 @@ jobs:
 
       - run: cat ./app/weather-app/src/components/Weather-App/WeatherApp,jsx
 
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+
+      - run: npm ci
+        working-directory: ./app/weather-app
+
+      - run: npm run build --if-present
+        working-directory: ./app/weather-app
+
+      - run: npm test
+        working-directory: ./app/weather-app
+
   iac:
     needs: changes
     if: ${{ needs.changes.outputs.iac == 'true' }}

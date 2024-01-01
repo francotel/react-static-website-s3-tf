@@ -10,6 +10,7 @@ import wind_icon from "../assets/wind.png";
 import humidity_icon from "../assets/humidity.png";
 // import API_SECRET_OPEN_WEATHER from './config';
 
+
 const WeatherApp = () => {
     //ADDING API KEY
     let api_key = API_SECRET_OPEN_WEATHER; //
