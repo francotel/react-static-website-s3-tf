@@ -58,9 +58,9 @@ jobs:
         with:
           find: "API_SECRET_OPEN_WEATHER"
           replace: ${{ secrets.API_KEY_OPEN_WEATHER }}
-          include: "app/weather-app/src/components/Weather-App/WeatherApp,jsx"
+          include: "app/weather-app/src/components/Weather-App/WeatherApp.jsx"
 
-      - run: cat ./app/weather-app/src/components/Weather-App/WeatherApp,jsx
+      - run: cat ./app/weather-app/src/components/Weather-App/WeatherApp.jsx
 
       - name: Use Node.js
         uses: actions/setup-node@v3
