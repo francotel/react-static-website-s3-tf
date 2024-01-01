@@ -50,10 +50,15 @@ jobs:
       
       - run: ls -la
 
-      - name: Create config file
-        run: echo "const API_SECRET = '${{ secrets.API_SECRET }}';\nexport default API_SECRET;" > app/weather-app/src/components/Weather-App/config.js
-      
-      - run: cat src/components/Weather-App/config.js
+
+      - name: Find and Replace API_KEY_WEATHER
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "API_SECRET"
+          replace: ${{ secrets.API_KEY_OPEN_WEATHER }}
+          include: "./app/Weather_App/.env"
+
+      - run: cat ./app/Weather_App/.env
 
   iac:
     needs: changes
