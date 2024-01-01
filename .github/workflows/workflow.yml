@@ -66,6 +66,19 @@ jobs:
 
       - run: ls ./app/weather-app
 
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@v1
+        with:
+          organization: ${{ secrets.SONAR_ORGANIZATION }} # Tu organización de SonarCloud
+          token: ${{ secrets.SONAR_TOKEN }} # Token de acceso de SonarCloud
+          projectKey: 'demo-sast' # Clave del proyecto en SonarCloud
+          projectName: 'demo-devsecops' # Nombre del proyecto en SonarCloud
+          projectBaseDir: './app/weather-app/build' # Directorio de la aplicación React (cambia si es necesario)
+          extraProperties: |
+            # Propiedades adicionales si las necesitas
+            sonar.sources=src
+            sonar.exclusions=**/*.spec.js,**/*.test.js
+
   iac:
     needs: changes
     if: ${{ needs.changes.outputs.iac == 'true' }}
