@@ -72,7 +72,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          projectBaseDir: './app/weather-app/build'
+          projectBaseDir: './app/weather-app'
         #   organization: ${{ secrets.SONAR_ORGANIZATION }} # Tu organización de SonarCloud
         #   token: ${{ secrets.SONAR_TOKEN }} # Token de acceso de SonarCloud
         #   projectKey: 'demo-sast' # Clave del proyecto en SonarCloud
