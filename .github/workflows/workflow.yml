@@ -58,7 +58,7 @@ jobs:
         with:
           find: "CHANGE_API_SECRET"
           replace: ${{ secrets.API_KEY_OPEN_WEATHER }}
-          include: "./app/weather-app/.env"
+          include: "app/weather-app/.env"
 
       - run: cat ./app/weather-app/.env
 
