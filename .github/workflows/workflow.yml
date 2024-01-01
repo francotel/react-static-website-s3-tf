@@ -56,7 +56,7 @@ jobs:
       - name: Find and Replace API_KEY_WEATHER
         uses: jacobtomlinson/gha-find-replace@v3
         with:
-          find: "API_SECRET"
+          find: "CHANGE_API_SECRET"
           replace: ${{ secrets.API_KEY_OPEN_WEATHER }}
           include: "./app/weather-app/.env"
 
