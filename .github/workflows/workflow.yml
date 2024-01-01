@@ -49,18 +49,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITLEAKS_ENABLE_UPLOAD_ARTIFACT: false
           GITLEAKS_ENABLE_COMMENTS: true
-      
-      - run: ls -la
-
-
-      - name: Find and Replace API_KEY_WEATHER
-        uses: jacobtomlinson/gha-find-replace@v3
-        with:
-          find: "API_SECRET_OPEN_WEATHER"
-          replace: ${{ format('password={0}', secrets.API_KEY_OPEN_WEATHER) }}
-          include: "app/weather-app/src/components/Weather-App/WeatherApp.jsx"
-
-      - run: cat ./app/weather-app/src/components/Weather-App/WeatherApp.jsx
 
       - name: Use Node.js
         uses: actions/setup-node@v3
