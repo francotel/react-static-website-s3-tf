@@ -12,11 +12,9 @@ import humidity_icon from "../assets/humidity.png";
 
 const WeatherApp = () => {
     //ADDING API KEY
-    let api_key=""; //API_SECRET_OPEN_WEATHER
+    let api_key = API_SECRET_OPEN_WEATHER; //
     const [ wicon, setWicon] = useState(cloud_icon);
 
-
-    
     const search = async () =>{
        const element = document.getElementsByClassName("cityInput");
        if(element[0].value==="")
@@ -27,8 +25,6 @@ const WeatherApp = () => {
        //ADDING API KEY, AND ${element[0].value} THIS VALUE WILL DEPEND UPON THE INPUT GIVEN BY THE USER, AND THE API WILL SHOW THE WEATHER CONDITION OF THAT
        //CITY AND ${api_key} IS WRITTERN TO HIDE THE API KEY
        let url =`https://api.openweathermap.org/data/2.5/weather?q=${element[0].value}&units=Metric&appid=${api_key}`;
-       
-
 
        let response = await fetch(url);
        let data = await response.json();
@@ -39,15 +35,12 @@ const WeatherApp = () => {
        const tempreture = document.getElementsByClassName("weather-temp");
        const location = document.getElementsByClassName("weather-location");
 
-
       //FETCHING DATA FROM API DATASET
 
       humidity[0].innerHTML = data.main.humidity + " %";
       wind[0].innerHTML = Math.floor(data.wind.speed) + " km/h";
       tempreture[0].innerHTML = Math.floor(data.main.temp) + " °C";
       location[0].innerHTML = data.name;
-
-
 
       //IF-ELSE CONDITION FOR WEATHER IMAGE CHANGE ACCORIND TO ACUTAL WEATHER
 
